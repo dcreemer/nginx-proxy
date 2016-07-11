@@ -1,7 +1,4 @@
-FROM alpine:3.4
-
-RUN apk add --update ca-certificates openssl nginx s6 && \
-    rm -rf /var/cache/apk/*
+FROM registry.gitlab.com/dcreemer/nginx-alpine:latest
 
 # install docker-gen
 ENV DOCKER_GEN_VERSION 0.7.3
@@ -15,5 +12,3 @@ VOLUME ["/etc/nginx/certs"]
 
 COPY s6 /s6
 COPY nginx /etc/nginx/
-
-CMD ["s6-svscan", "/s6"]
